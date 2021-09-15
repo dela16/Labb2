@@ -6,7 +6,13 @@ namespace Labb2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("What do you want to do? Pick a number.");
+            Console.WriteLine("1. Register new customer.");
+            Console.WriteLine("2. Login.");
+
+
+
+
         }
     }
 }
