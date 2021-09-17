@@ -2,8 +2,11 @@
 
 public class Customer
 {
-	public Customer()
+	string name;
+	int age;
+	public Customer(string name, int age)
 	{
-
+		this.name = name;
+		this.age = age;
 	}
 }
