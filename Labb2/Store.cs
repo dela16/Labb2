@@ -21,15 +21,15 @@ namespace Labb2
         static Product tiara = new Product(799, "Tiara");
         static Product lipstick = new Product(49, "Lipstick");
         static List<Product> stroller = new List<Product>(); //Lista med produkter personen valt. Den här lägger vi här uppe för att den behöver nås av alla metoder. 
-        //Varför skriver vi static?
+        //Varför skriver vi static? Varför skriver vi inte det ovan i product klassen?
         //Alla kunder finns i classen Database. Snyggare med mindre kod. 
-        
+
 
         static void Main(string[] args)
         {
             //Product product = new Product(10, "wig");
             LoginChoices(); //Här gör jag en metod för switchen nedanför. Val 1. 
-            AfterYouveLoggedin(); //Metod för menyval 2. Kom på ett bättre namn. 
+            Menu2(); //Metod för menyval 2. Kom på ett bättre namn. 
            
 
         }
@@ -70,21 +70,27 @@ namespace Labb2
             char[] numbersInPassword = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             char[] charachtersInPassword = { '!', ',', '.', '?' };
 
+            //if (lettersInPassword.CompareTo(userPassword)) 'a'.CompareTo(userPassword);//
+            //{
+            //    Console.WriteLine("ja");
+            //}
+            //
+
             //Vi kan säkert förkorta den här if-satsen med hjälp av || på något sätt.
             foreach (char ch in userPassword)//denna blir fortfarande fel.
             {
 
-                if (userPassword == lettersInPassword) //userPassword[userPassword.Contains(lettersinPassword)]; Något sånt här? Linqigt. 
+                if (userPassword.Contain(lettersInPassword)) //
                 {
-                    
+
                 }
-                else if (userPassword != lettersInPassword)//LA till alla de här nu, tror det blev för mycket...
+                else if (userPassword !=.Contain(lettersInPassword))//LA till alla de här nu, tror det blev för mycket...
                 {
                     Console.WriteLine("You have to have some letters in your password.");//Yep den förstör redan här. 
                 }
                 else if (userPassword == (numbersInPassword))// Fortfarande fel, måste ju contain them.  password.IndexOfAny(charachtersInPassword))//Förklaring av IndexOf.
                 {
-                    
+
                     //RegisterNewCustomer();
                 }
                 else if (userPassword != (numbersInPassword))
@@ -93,13 +99,13 @@ namespace Labb2
                 }
                 else if (userPassword == (charachtersInPassword))//Använda oss av Linq? Tom var lite inne på detta. 
                 {
-                                //DEt här blir väl fel? Om jag skriver in något av chars så ska denna skrivas?
+                    //DEt här blir väl fel? Om jag skriver in något av chars så ska denna skrivas?
                 }
                 else if (userPassword != (charachtersInPassword))
                 {
                     Console.WriteLine("The password has to contain letters and a number/charachter.");
                 }
-                else 
+                else
                 {
                     Console.WriteLine("Great! Now you have a password! Now what do you want to do?");
                     //AfterYouveLoggedIn(); //Här vill ju jag gå vidare/ tillbaka till meny 2. 
@@ -123,7 +129,7 @@ namespace Labb2
                 {
                     Console.WriteLine("Login successfull, welcome Knatte.");
                     //Customer.Knatte; //Hur koppla till classen database ? Behöver hela metoden vara i den classen? 
-                    AfterYouveLoggedin(); 
+                    Menu2(); 
                 }
                 else
                 {
@@ -136,11 +142,11 @@ namespace Labb2
                 if (password == "321")
                 {
                     Console.WriteLine("Login successfull, welcome Fnatte.");
-                    AfterYouveLoggedin();
+                    Menu2();
                 }
                 else
                 {
-                    Console.WriteLine("Password was not correct, please try Login again.");
+                    Console.WriteLine("Password was not correct, please try Login again."); //Här vill han att endast lösen ska skrivas om, spelar det roll? Egen metod för lösen?
                     LoginMenu();
                 }
             }
@@ -149,7 +155,7 @@ namespace Labb2
                 if (password == "213")
                 {
                     Console.WriteLine("Login successfull, welcome Tjatte.");
-                    AfterYouveLoggedin();
+                    Menu2();
                 }
                 else
                 {
@@ -165,7 +171,7 @@ namespace Labb2
         }
 
 
-        private static void AfterYouveLoggedin()
+        private static void Menu2()
         {//How much money do you have går till wallet metoden.? 
             Console.WriteLine("A. Do some shopping.");
             Console.WriteLine("B. Watch you shopping cart.");
@@ -245,7 +251,7 @@ namespace Labb2
                         break;
                     default:
                     Console.WriteLine("Great, You'll find all the products, costs and total costs in your shoppingcart.");
-                    AfterYouveLoggedin();
+                    Menu2();
                     break;
                 }
             
@@ -274,7 +280,7 @@ namespace Labb2
             Console.Write(GetTotalCost()); //Vi sätter den utanför loopen för jag vill endast skriva ut det slutgiltiga värdet. Hur göra totalen röd?
             Console.ResetColor(); 
 
-            Console.WriteLine("\nDo you want to keep on shopping or go back to menu? Press 1 for shopping and 2 for menu. ");
+            Console.WriteLine("\nDo you want to continue shopping or go back to menu? Press 1 for shopping and 2 for menu. ");
             string customerMenuChoice = Console.ReadLine();
             if (customerMenuChoice == "1")
             {
@@ -282,14 +288,33 @@ namespace Labb2
             }
             else if (customerMenuChoice == "2")
             {
-                AfterYouveLoggedin();
+                Menu2();
             }
 
-            AfterYouveLoggedin();
+            Menu2();
             //Jag måste kunna gå tillbaka till kassan och meny2 igen. 
             //Det du kan göra sen är att få datorn att skriva ut antalet på en rad än flera rader med en produkt. Ex. 3 wigs. 
         }
 
+        private static void Wallet()
+        {
+            if(Customer == Knatte)
+            {
+                Knatte.wallet; 
+            }
+            else if (Customer == Customer.Fnatte)
+            {
+                Fnatte.wallet;
+            }
+            else if (Customer == Customer.Tjatte)
+            {
+                Tjatte.wallet; 
+            }
+            else if (RegisteredNewCustomer())
+            {
+
+            }
+        }
         private static void CheckOut()
         {
             double bitcoinConverter = GetTotalCost()/ 314000;
@@ -297,11 +322,23 @@ namespace Labb2
 
             Console.WriteLine("You've bought for " + GetTotalCost() + "SEK, which is also " + bitcoinConverter + " Bitcoins and " + shibacoinConverter + " Shibacoins. ");
             Console.WriteLine("Time to pay!");
-            //Wallet function. 
+
+
+            Console.WriteLine("You have " + Customer.Wallet - GetTotalCost() + " SEK left. ");
+            Console.WriteLine("Do you want to continue shopping or log out? Press 1 for shopping or 2 for logging out.");
+            string userInput = Console.ReadLine();
+            if (userInput == "1")
+            {
+                Menu2();
+            }
+            else if (userInput == "2")
+            {
+                Console.WriteLine("Thank you, come back again");
+            }
+
 
         }
 
-        //Vad hända efter kassan? Skapa plånboksvariabel som drar pengar?
     }
 
 }

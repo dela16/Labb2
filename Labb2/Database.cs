@@ -19,7 +19,7 @@ namespace Labb2
         static Customer Tjatte = new Customer("Tjatte", 65, 1045293);
 
         List<Customer> customers = new List<Customer>(); //Här har vi en lista med kunderna sedan och kan lägga till nya och hitta gamla. 
-
+        //Den nya kunden måste skriva in sin ålder 
 
     }
         
