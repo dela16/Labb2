@@ -56,11 +56,117 @@ namespace Labb2
                     break;
             }
         }
+        public static void RegisterNewCustomer()
+        {
+            //Skapa användarnamn och lösenord. Spara för användning senare. 
+            Console.WriteLine("Please enter a username");
+            string userName = Console.ReadLine(); //Den här måste vara case sensitive och sparas någonstans på något sätt. Och jämföras? Eller är det overkill? 
+
+            Console.WriteLine("Welcome " + userName + " Now create a password. It must contain both letters, (a-z), numbers (0-9) or characters (!,.?)");
+            string password = Console.ReadLine();
+            char[] userPassword = password.ToCharArray();
+
+            char[] lettersInPassword = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z' };//Hur göra de versaler?
+            char[] numbersInPassword = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            char[] charachtersInPassword = { '!', ',', '.', '?' };
+
+            //Vi kan säkert förkorta den här if-satsen med hjälp av || på något sätt.
+            foreach (char ch in userPassword)//denna blir fortfarande fel.
+            {
+
+                if (userPassword == lettersInPassword) //userPassword[userPassword.Contains(lettersinPassword)]; Något sånt här? Linqigt. 
+                {
+                    
+                }
+                else if (userPassword != lettersInPassword)//LA till alla de här nu, tror det blev för mycket...
+                {
+                    Console.WriteLine("You have to have some letters in your password.");//Yep den förstör redan här. 
+                }
+                else if (userPassword == (numbersInPassword))// Fortfarande fel, måste ju contain them.  password.IndexOfAny(charachtersInPassword))//Förklaring av IndexOf.
+                {
+                    
+                    //RegisterNewCustomer();
+                }
+                else if (userPassword != (numbersInPassword))
+                {
+                    Console.WriteLine("The password has to contain letters and a number/charachter.");
+                }
+                else if (userPassword == (charachtersInPassword))//Använda oss av Linq? Tom var lite inne på detta. 
+                {
+                                //DEt här blir väl fel? Om jag skriver in något av chars så ska denna skrivas?
+                }
+                else if (userPassword != (charachtersInPassword))
+                {
+                    Console.WriteLine("The password has to contain letters and a number/charachter.");
+                }
+                else 
+                {
+                    Console.WriteLine("Great! Now you have a password! Now what do you want to do?");
+                    //AfterYouveLoggedIn(); //Här vill ju jag gå vidare/ tillbaka till meny 2. 
+                }
+                break;//Ska vi kunna logga ut också? 
+            }
+
+        }
+
+        private static void LoginMenu()//Ska den vara här? Eller kopplas den inte ihop med databasen då och deras konstruktorer? 
+        {
+            Console.WriteLine("Welcome, please enter your username. Make sure to write correct with capitols or not.");
+            string username = Console.ReadLine();
+
+            Console.WriteLine("Hello, " + username + " Now please enter your password");
+            string password = Console.ReadLine();
+
+            if (username == "Knatte") //Varför funkade inte ToUpper ()? //När inloggning lyckas då ska man få tillgång till knatte som customer. 
+            {
+                if (password == "123") //Varför funkade det inte med != ? 
+                {
+                    Console.WriteLine("Login successfull, welcome Knatte.");
+                    //Customer.Knatte; //Hur koppla till classen database ? Behöver hela metoden vara i den classen? 
+                    AfterYouveLoggedin(); 
+                }
+                else
+                {
+                    Console.WriteLine("Password was not correct, please try Login again.");
+                    LoginMenu();
+                }
+            }
+            else if (username == "Fnatte")
+            {
+                if (password == "321")
+                {
+                    Console.WriteLine("Login successfull, welcome Fnatte.");
+                    AfterYouveLoggedin();
+                }
+                else
+                {
+                    Console.WriteLine("Password was not correct, please try Login again.");
+                    LoginMenu();
+                }
+            }
+            else if (username == "Tjatte")
+            {
+                if (password == "213")
+                {
+                    Console.WriteLine("Login successfull, welcome Tjatte.");
+                    AfterYouveLoggedin();
+                }
+                else
+                {
+                    Console.WriteLine("Password was not correct, please try Login again.");
+                    LoginMenu();
+                }
+            }
+            else
+            {
+                Console.WriteLine("If you do not have an account, please register as a new customer.");
+                LoginChoices();
+            }
+        }
+
 
         private static void AfterYouveLoggedin()
-        {
-           // Console.Clear(); //Vi clearar consolen för att få kortare kod. Funkar ej. 
-            Console.WriteLine("Next step is to choose what you want to do. Do you want to: ");
+        {//How much money do you have går till wallet metoden.? 
             Console.WriteLine("A. Do some shopping.");
             Console.WriteLine("B. Watch you shopping cart.");
             Console.WriteLine("C. Head to the cashier.");
@@ -163,9 +269,12 @@ namespace Labb2
             {
                 Console.WriteLine(product.Name + " Which costs "  + product.Price + " SEK."); 
             }
-            Console.WriteLine("The total cost of it all is " + GetTotalCost()); //Vi sätter den utanför loopen för jag vill endast skriva ut det slutgiltiga värdet. 
+            Console.Write("The total cost of it all is ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(GetTotalCost()); //Vi sätter den utanför loopen för jag vill endast skriva ut det slutgiltiga värdet. Hur göra totalen röd?
+            Console.ResetColor(); 
 
-            Console.WriteLine("Do you want to keep on shopping or go back to menu? Press 1 for shopping and 2 for menu. ");
+            Console.WriteLine("\nDo you want to keep on shopping or go back to menu? Press 1 for shopping and 2 for menu. ");
             string customerMenuChoice = Console.ReadLine();
             if (customerMenuChoice == "1")
             {
@@ -187,7 +296,8 @@ namespace Labb2
             double shibacoinConverter = (float)GetTotalCost() / 0.00006678F;
 
             Console.WriteLine("You've bought for " + GetTotalCost() + "SEK, which is also " + bitcoinConverter + " Bitcoins and " + shibacoinConverter + " Shibacoins. ");
-            Console.WriteLine("");
+            Console.WriteLine("Time to pay!");
+            //Wallet function. 
 
         }
 
