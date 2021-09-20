@@ -16,5 +16,7 @@ namespace Labb2
 			this.name = name;
 			
 		}
+		public double Price { get { return price; }} //Lär dig mer om denna. 
+		public string Name { get { return name; }} //Stor bokstav för det blir en metod typ. 
 	}
 }
