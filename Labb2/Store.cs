@@ -24,6 +24,7 @@ namespace Labb2
                                                              //Varför skriver vi static? Varför skriver vi inte det ovan i product klassen?
                                                              //Alla kunder finns i classen Database. Snyggare med mindre kod. 
         static Database database = new Database();
+        static Customer customer; 
 
         static void Main(string[] args)
         {
@@ -83,6 +84,7 @@ namespace Labb2
 
 
             bool doesTheUserExist = database.ValidateCredientials(username, password);
+            customer = database.GetCustomer(username); 
 
             Console.WriteLine("Password was not correct, please try Login again.");
             LoginMenu();
@@ -217,35 +219,18 @@ namespace Labb2
             //Det du kan göra sen är att få datorn att skriva ut antalet på en rad än flera rader med en produkt. Ex. 3 wigs. 
         }
 
-        private static void Wallet()//Den här kanske blir onödig. 
-        {
-            if(Customer == Knatte)
-            {
-                Database._wallet; 
-            }
-            else if (Customer == Customer.Fnatte)
-            {
-                Database._wallet;
-            }
-            else if (Customer == Database.Tjatte)
-            {
-                Tjatte._wallet; 
-            }
-            else if (Customer == Customer._moneyInWallet)//Behöver troligtvis inget eget namn. 
-            {
-                
-            }
-        }
+
         private static void CheckOut()
         {
             double bitcoinConverter = GetTotalCost()/ 314000;
             double shibacoinConverter = (float)GetTotalCost() / 0.00006678F;
+            long customerWallet = customer.Wallet; 
 
             Console.WriteLine("You've bought for " + GetTotalCost() + "SEK, which is also " + bitcoinConverter + " Bitcoins and " + shibacoinConverter + " Shibacoins. ");
             Console.WriteLine("Time to pay!");
 
 
-            Console.WriteLine("You have " + Customer.Wallet - GetTotalCost() + " SEK left. ");
+            Console.WriteLine("You have " + (customerWallet - GetTotalCost()) + " SEK left. ");
             Console.WriteLine("Do you want to continue shopping or log out? Press 1 for shopping or 2 for logging out.");
 
             string userInput = Console.ReadLine();

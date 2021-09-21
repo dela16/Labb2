@@ -40,9 +40,21 @@ namespace Labb2
 
         public void RegisterNewCustomer(string username, string password, long wallet) 
         {
-            Customer newCustomer = new Customer(username, password, wallet);
+            Customer newCustomer = new Customer(username, password, wallet); //Här registreras kunden till databasen. Se store classen för koppling. 
             customers.Add(newCustomer);
+            Console.WriteLine("Registration successfull.");
         }
 
+        public Customer GetCustomer(string username) //Första Customer betyder vad du returnerar. Bool på rad 29 betyder att du returnerar den. 
+        {
+            foreach (Customer customer in customers)
+            {
+                if (customer.UserName == username) 
+                {
+                    return customer;
+                }
+            }
+            return null;
+        }
     }
 }
