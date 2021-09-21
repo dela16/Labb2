@@ -21,16 +21,16 @@ namespace Labb2
         static Product tiara = new Product(799, "Tiara");
         static Product lipstick = new Product(49, "Lipstick");
         static List<Product> stroller = new List<Product>(); //Lista med produkter personen valt. Den här lägger vi här uppe för att den behöver nås av alla metoder. 
-        //Varför skriver vi static? Varför skriver vi inte det ovan i product klassen?
-        //Alla kunder finns i classen Database. Snyggare med mindre kod. 
-
+                                                             //Varför skriver vi static? Varför skriver vi inte det ovan i product klassen?
+                                                             //Alla kunder finns i classen Database. Snyggare med mindre kod. 
+        static Database database = new Database();
 
         static void Main(string[] args)
         {
             //Product product = new Product(10, "wig");
             LoginChoices(); //Här gör jag en metod för switchen nedanför. Val 1. 
             Menu2(); //Metod för meny2.
-           
+
 
         }
         static void LoginChoices()
@@ -62,117 +62,33 @@ namespace Labb2
             Console.WriteLine("Please enter a username");
             string userName = Console.ReadLine(); //Den här måste vara case sensitive och sparas någonstans på något sätt.
 
-            Console.WriteLine("Welcome " + userName + " Now create a password. It must contain both letters, (a-z), numbers (0-9) or characters (!,.?)");
+            Console.WriteLine("Welcome " + userName + " Now create a password. ");
             string password = Console.ReadLine();
-            //har[] userPassword = password.ToCharArray();
-            //
-            //har[] lettersInPassword = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z' };//Hur göra de versaler?
-            //har[] numbersInPassword = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-            //har[] charachtersInPassword = { '!', ',', '.', '?' };
-            //
-            ///if (lettersInPassword.CompareTo(userPassword)) 'a'.CompareTo(userPassword);//
-            ///{
-            ///    Console.WriteLine("ja");
-            ///}
-            ///
-            //
-            ///Vi kan säkert förkorta den här if-satsen med hjälp av || på något sätt.
-            //oreach (char ch in userPassword)//denna blir fortfarande fel.
-            //
-            //
-            //   if (userPassword.Contain(lettersInPassword)) //
-            //   {
-            //
-            //   }
-            //   else if (userPassword !=.Contain(lettersInPassword))//LA till alla de här nu, tror det blev för mycket...
-            //   {
-            //       Console.WriteLine("You have to have some letters in your password.");//Yep den förstör redan här. 
-            //   }
-            //   else if (userPassword == (numbersInPassword))// Fortfarande fel, måste ju contain them.  password.IndexOfAny(charachtersInPassword))//Förklaring av IndexOf.
-            //   {
-            //
-            //       //RegisterNewCustomer();
-            //   }
-            //   else if (userPassword != (numbersInPassword))
-            //   {
-            //       Console.WriteLine("The password has to contain letters and a number/charachter.");
-            //   }
-            //   else if (userPassword == (charachtersInPassword))//Använda oss av Linq? Tom var lite inne på detta. 
-            //   {
-            //       //DEt här blir väl fel? Om jag skriver in något av chars så ska denna skrivas?
-            //   }
-            //   else if (userPassword != (charachtersInPassword))
-            //   {
-            //       Console.WriteLine("The password has to contain letters and a number/charachter.");
-            //   }
-            //   else
-            //   {
-            //       Console.WriteLine("Great! Now you have a password! Now what do you want to do?");
-            //       //Menu2() 
-            //   }
-            //   break;
-            //}
+            
             Console.WriteLine("How much money do you have in your wallet?");
-            string money = Console.ReadLine();
-            long moneyInWallet = Int64.Parse(money);
+            long wallet = long.Parse(Console.ReadLine());
 
+            database.RegisterNewCustomer(userName, password, wallet);
 
         }
 
         private static void LoginMenu()//Ska den vara här? Eller kopplas den inte ihop med databasen då och deras konstruktorer? 
-            //Här vill han att endast lösen ska skrivas om, spelar det roll? Egen metod för lösen?
-        {
+                                       //Här vill han att endast lösen ska skrivas om, spelar det roll? Egen metod för lösen?
+        { 
             Console.WriteLine("Welcome, please enter your username. Make sure to write correct with capitols or not.");
             string username = Console.ReadLine();
 
             Console.WriteLine("Hello, " + username + " Now please enter your password");
             string password = Console.ReadLine();
 
-            if (username == "Knatte") //Varför funkade inte ToUpper ()? //När inloggning lyckas då ska man få tillgång till knatte som customer. 
-            {
-                if (password == "123") //Varför funkade det inte med != ? 
-                {
-                    Console.WriteLine("Login successfull, welcome Knatte. You have " + Knatte.wallet + " SEK in your wallet to buy stuff for.");
-                    //Customer.Knatte; //Hur koppla till classen database ? Behöver hela metoden vara i den classen? 
-                    Menu2(); 
-                }
-                else
-                {
-                    Console.WriteLine("Password was not correct, please try Login again.");
-                    LoginMenu();
-                }
-            }
-            else if (username == "Fnatte")
-            {
-                if (password == "321")
-                {
-                    Console.WriteLine("Login successfull, welcome Fnatte.You have " + Fnatte.wallet + " SEK in your wallet to buy stuff for.");
-                    Menu2();
-                }
-                else
-                {
-                    Console.WriteLine("Password was not correct, please try Login again."); 
-                    LoginMenu();
-                }
-            }
-            else if (username == "Tjatte")
-            {
-                if (password == "213")
-                {
-                    Console.WriteLine("Login successfull, welcome Tjatte.You have " + Tjatte.wallet + " SEK in your wallet to buy stuff for.");
-                    Menu2();
-                }
-                else
-                {
-                    Console.WriteLine("Password was not correct, please try Login again.");
-                    LoginMenu();
-                }
-            }
-            else
-            {
-                Console.WriteLine("If you do not have an account, please register as a new customer.");
-                LoginChoices();
-            }
+
+            bool doesTheUserExist = database.ValidateCredientials(username, password);
+
+            Console.WriteLine("Password was not correct, please try Login again.");
+            LoginMenu();
+
+            Console.WriteLine("If you do not have an account, please register as a new customer.");
+            LoginChoices();
         }
 
 
@@ -269,7 +185,7 @@ namespace Labb2
             double totalCost = 0;
             foreach (Product product in stroller)
             {
-                totalCost += product.Price;
+                totalCost += product._Price;
             }
             return totalCost;
         }
@@ -278,7 +194,7 @@ namespace Labb2
             
             foreach (Product product in stroller)
             {
-                Console.WriteLine(product.Name + " Which costs "  + product.Price + " SEK."); 
+                Console.WriteLine(product._Name + " Which costs "  + product._Price + " SEK."); 
             }
             Console.Write("The total cost of it all is ");
             Console.ForegroundColor = ConsoleColor.Red;
@@ -305,17 +221,17 @@ namespace Labb2
         {
             if(Customer == Knatte)
             {
-                Knatte.wallet; 
+                Database._wallet; 
             }
             else if (Customer == Customer.Fnatte)
             {
-                Fnatte.wallet;
+                Database._wallet;
             }
-            else if (Customer == Customer.Tjatte)
+            else if (Customer == Database.Tjatte)
             {
-                Tjatte.wallet; 
+                Tjatte._wallet; 
             }
-            else if (Customer == Customer.moneyInWallet)
+            else if (Customer == Customer._moneyInWallet)//Behöver troligtvis inget eget namn. 
             {
                 
             }

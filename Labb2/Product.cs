@@ -16,7 +16,7 @@ namespace Labb2
 			this.name = name;
 			
 		}
-		public double Price { get { return price; }} //Lär dig mer om denna. 
-		public string Name { get { return name; }} //Stor bokstav för det blir en metod typ. 
+		public double _Price { get { return price; }} //Lär dig mer om denna. Gjorde dessa till fält, fuckar jag upp det nu? 
+		public string _Name { get { return name; }} //Stor bokstav för det blir en metod typ. 
 	}
 }
