@@ -14,9 +14,9 @@ namespace Labb2
         //Här använder vi get,set?
 
         //klassen "Customer"/"Kund"/"User" ska representera EN kund
-        static Customer Knatte = new Customer("Knatte", 12, 500); //Finns 3 olika + en helt ny. 
-        static Customer Fnatte = new Customer("Fnatte", 28, 12000);
-        static Customer Tjatte = new Customer("Tjatte", 65, 1045293);
+        static Customer Knatte = new Customer("Knatte", 500); //Finns 3 olika + en helt ny. 
+        static Customer Fnatte = new Customer("Fnatte", 12000);
+        static Customer Tjatte = new Customer("Tjatte", 1045293); //Varför lägger vi inte dessa i store classen också om alla metoder ska kunna nå den också? 
 
         List<Customer> customers = new List<Customer>(); //Här har vi en lista med kunderna sedan och kan lägga till nya och hitta gamla. 
         //Den nya kunden måste skriva in sin ålder 

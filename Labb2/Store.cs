@@ -29,7 +29,7 @@ namespace Labb2
         {
             //Product product = new Product(10, "wig");
             LoginChoices(); //Här gör jag en metod för switchen nedanför. Val 1. 
-            Menu2(); //Metod för menyval 2. Kom på ett bättre namn. 
+            Menu2(); //Metod för meny2.
            
 
         }
@@ -39,9 +39,9 @@ namespace Labb2
             Console.WriteLine("1. Register new customer.");
             Console.WriteLine("2. Login.");
 
-            string userInput = Console.ReadLine(); //Här sparar vi användarens val. 
+            string userInput = Console.ReadLine();
 
-            switch (userInput) //Här skriver du det som userInput kan välja/trycka. 
+            switch (userInput)
             {
                 case "1":
                     Console.WriteLine("Welcome new customer!");
@@ -60,62 +60,67 @@ namespace Labb2
         {
             //Skapa användarnamn och lösenord. Spara för användning senare. 
             Console.WriteLine("Please enter a username");
-            string userName = Console.ReadLine(); //Den här måste vara case sensitive och sparas någonstans på något sätt. Och jämföras? Eller är det overkill? 
+            string userName = Console.ReadLine(); //Den här måste vara case sensitive och sparas någonstans på något sätt.
 
             Console.WriteLine("Welcome " + userName + " Now create a password. It must contain both letters, (a-z), numbers (0-9) or characters (!,.?)");
             string password = Console.ReadLine();
-            char[] userPassword = password.ToCharArray();
-
-            char[] lettersInPassword = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z' };//Hur göra de versaler?
-            char[] numbersInPassword = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-            char[] charachtersInPassword = { '!', ',', '.', '?' };
-
-            //if (lettersInPassword.CompareTo(userPassword)) 'a'.CompareTo(userPassword);//
-            //{
-            //    Console.WriteLine("ja");
-            //}
+            //har[] userPassword = password.ToCharArray();
             //
+            //har[] lettersInPassword = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z' };//Hur göra de versaler?
+            //har[] numbersInPassword = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            //har[] charachtersInPassword = { '!', ',', '.', '?' };
+            //
+            ///if (lettersInPassword.CompareTo(userPassword)) 'a'.CompareTo(userPassword);//
+            ///{
+            ///    Console.WriteLine("ja");
+            ///}
+            ///
+            //
+            ///Vi kan säkert förkorta den här if-satsen med hjälp av || på något sätt.
+            //oreach (char ch in userPassword)//denna blir fortfarande fel.
+            //
+            //
+            //   if (userPassword.Contain(lettersInPassword)) //
+            //   {
+            //
+            //   }
+            //   else if (userPassword !=.Contain(lettersInPassword))//LA till alla de här nu, tror det blev för mycket...
+            //   {
+            //       Console.WriteLine("You have to have some letters in your password.");//Yep den förstör redan här. 
+            //   }
+            //   else if (userPassword == (numbersInPassword))// Fortfarande fel, måste ju contain them.  password.IndexOfAny(charachtersInPassword))//Förklaring av IndexOf.
+            //   {
+            //
+            //       //RegisterNewCustomer();
+            //   }
+            //   else if (userPassword != (numbersInPassword))
+            //   {
+            //       Console.WriteLine("The password has to contain letters and a number/charachter.");
+            //   }
+            //   else if (userPassword == (charachtersInPassword))//Använda oss av Linq? Tom var lite inne på detta. 
+            //   {
+            //       //DEt här blir väl fel? Om jag skriver in något av chars så ska denna skrivas?
+            //   }
+            //   else if (userPassword != (charachtersInPassword))
+            //   {
+            //       Console.WriteLine("The password has to contain letters and a number/charachter.");
+            //   }
+            //   else
+            //   {
+            //       Console.WriteLine("Great! Now you have a password! Now what do you want to do?");
+            //       //Menu2() 
+            //   }
+            //   break;
+            //}
+            Console.WriteLine("How much money do you have in your wallet?");
+            string money = Console.ReadLine();
+            long moneyInWallet = Int64.Parse(money);
 
-            //Vi kan säkert förkorta den här if-satsen med hjälp av || på något sätt.
-            foreach (char ch in userPassword)//denna blir fortfarande fel.
-            {
-
-                if (userPassword.Contain(lettersInPassword)) //
-                {
-
-                }
-                else if (userPassword !=.Contain(lettersInPassword))//LA till alla de här nu, tror det blev för mycket...
-                {
-                    Console.WriteLine("You have to have some letters in your password.");//Yep den förstör redan här. 
-                }
-                else if (userPassword == (numbersInPassword))// Fortfarande fel, måste ju contain them.  password.IndexOfAny(charachtersInPassword))//Förklaring av IndexOf.
-                {
-
-                    //RegisterNewCustomer();
-                }
-                else if (userPassword != (numbersInPassword))
-                {
-                    Console.WriteLine("The password has to contain letters and a number/charachter.");
-                }
-                else if (userPassword == (charachtersInPassword))//Använda oss av Linq? Tom var lite inne på detta. 
-                {
-                    //DEt här blir väl fel? Om jag skriver in något av chars så ska denna skrivas?
-                }
-                else if (userPassword != (charachtersInPassword))
-                {
-                    Console.WriteLine("The password has to contain letters and a number/charachter.");
-                }
-                else
-                {
-                    Console.WriteLine("Great! Now you have a password! Now what do you want to do?");
-                    //AfterYouveLoggedIn(); //Här vill ju jag gå vidare/ tillbaka till meny 2. 
-                }
-                break;//Ska vi kunna logga ut också? 
-            }
 
         }
 
         private static void LoginMenu()//Ska den vara här? Eller kopplas den inte ihop med databasen då och deras konstruktorer? 
+            //Här vill han att endast lösen ska skrivas om, spelar det roll? Egen metod för lösen?
         {
             Console.WriteLine("Welcome, please enter your username. Make sure to write correct with capitols or not.");
             string username = Console.ReadLine();
@@ -127,7 +132,7 @@ namespace Labb2
             {
                 if (password == "123") //Varför funkade det inte med != ? 
                 {
-                    Console.WriteLine("Login successfull, welcome Knatte.");
+                    Console.WriteLine("Login successfull, welcome Knatte. You have " + Knatte.wallet + " SEK in your wallet to buy stuff for.");
                     //Customer.Knatte; //Hur koppla till classen database ? Behöver hela metoden vara i den classen? 
                     Menu2(); 
                 }
@@ -141,12 +146,12 @@ namespace Labb2
             {
                 if (password == "321")
                 {
-                    Console.WriteLine("Login successfull, welcome Fnatte.");
+                    Console.WriteLine("Login successfull, welcome Fnatte.You have " + Fnatte.wallet + " SEK in your wallet to buy stuff for.");
                     Menu2();
                 }
                 else
                 {
-                    Console.WriteLine("Password was not correct, please try Login again."); //Här vill han att endast lösen ska skrivas om, spelar det roll? Egen metod för lösen?
+                    Console.WriteLine("Password was not correct, please try Login again."); 
                     LoginMenu();
                 }
             }
@@ -154,7 +159,7 @@ namespace Labb2
             {
                 if (password == "213")
                 {
-                    Console.WriteLine("Login successfull, welcome Tjatte.");
+                    Console.WriteLine("Login successfull, welcome Tjatte.You have " + Tjatte.wallet + " SEK in your wallet to buy stuff for.");
                     Menu2();
                 }
                 else
@@ -296,7 +301,7 @@ namespace Labb2
             //Det du kan göra sen är att få datorn att skriva ut antalet på en rad än flera rader med en produkt. Ex. 3 wigs. 
         }
 
-        private static void Wallet()
+        private static void Wallet()//Den här kanske blir onödig. 
         {
             if(Customer == Knatte)
             {
@@ -310,9 +315,9 @@ namespace Labb2
             {
                 Tjatte.wallet; 
             }
-            else if (RegisteredNewCustomer())
+            else if (Customer == Customer.moneyInWallet)
             {
-
+                
             }
         }
         private static void CheckOut()
@@ -326,14 +331,16 @@ namespace Labb2
 
             Console.WriteLine("You have " + Customer.Wallet - GetTotalCost() + " SEK left. ");
             Console.WriteLine("Do you want to continue shopping or log out? Press 1 for shopping or 2 for logging out.");
+
             string userInput = Console.ReadLine();
             if (userInput == "1")
             {
                 Menu2();
             }
-            else if (userInput == "2")
+            else if (userInput == "2")//Den här kanske ska göras till en metod för logga ut? 
             {
                 Console.WriteLine("Thank you, come back again");
+                LoginChoices(); 
             }
 
 
