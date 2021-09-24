@@ -130,7 +130,7 @@ namespace Labb2
             Console.WriteLine("For wig, choose 1. For tiara, choose 2. For Lipstick, choose 3. Press 4 to stop shopping");
             string customerChoice = Console.ReadLine();
 
-                switch (customerChoice)//Med hjälp av denna kör vi vidare i shoppingrundan tills vi trycker 4.
+                switch (customerChoice)
                 {
                     case "1":
                         stroller.Add(wig);

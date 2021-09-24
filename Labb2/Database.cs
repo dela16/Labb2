@@ -26,7 +26,7 @@ namespace Labb2
             foreach(Customer customer in customers)
             {
                 if (customer.UserName == username && customer.Password == password) //username kommer från readline i store, hittar den en knatte så hoppar den in i nästa if. Där kollar den efter rätt lösen också.
-                {//Hur göra för att få knatte godkänt också? ToUpper funkar inte.
+                {
                     return true; 
                 }
             }
@@ -40,7 +40,7 @@ namespace Labb2
             Console.WriteLine("Registration successfull.");
         }
 
-        public Customer GetCustomer(string username) //Första Customer betyder vad du returnerar. Bool på rad 29 betyder att du returnerar den. 
+        public Customer GetCustomer(string username)
         {
             foreach (Customer customer in customers)
             {
