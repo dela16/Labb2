@@ -12,7 +12,7 @@ namespace Labb2
         static Product tiara = new Product(799, "Tiara");
         static Product lipstick = new Product(49, "Lipstick");
 
-        static List<Product> stroller = new List<Product>(); //Lista med produkter kunden valt. Den här lägger vi här uppe för att den behöver nås av alla metoder. 
+        static List<Product> stroller = new List<Product>();  
 
         static Database database = new Database();
         static Customer currentCustomer; 
@@ -78,7 +78,7 @@ namespace Labb2
                 ShowLoggedInMenu();
             }
 
-            Console.WriteLine("If you do not have an account, please register as a new customer.");
+            Console.WriteLine("Wrong login information. If you do not have an account, please register as a new customer.");
             LoginChoices();
         }
 

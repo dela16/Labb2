@@ -25,7 +25,7 @@ namespace Labb2
         {
             foreach(Customer customer in customers)
             {
-                if (customer.UserName == username && customer.Password == password) //username kommer från readline i store, hittar den en knatte så hoppar den in i nästa if. Där kollar den efter rätt lösen också.
+                if (customer.UserName == username && customer.Password == password) //username kommer från readline i store, hittar den en knatte så hoppar den in i if-satsen. Där kollar den efter rätt lösen också.
                 {
                     return true; 
                 }
