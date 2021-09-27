@@ -62,7 +62,7 @@ namespace Labb2
         }
 
         private static void LoginMenu()
-                                       //Här vill han att endast lösen ska skrivas om, spelar det roll? Egen metod för lösen?
+                                      
         { 
             Console.WriteLine("Welcome, please enter your username.");
             string username = Console.ReadLine();
