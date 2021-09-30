@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Labb2
 {
 	public class Customer
@@ -6,11 +8,15 @@ namespace Labb2
 		private string _userName = "";
 		private string _password = "";
 		private long _wallet;
+
+		public List<Product> stroller;
+
 		public Customer(string userName, string password, long wallet)
 		{
 			_userName = userName;
 			_password = password;
-			_wallet = wallet; 
+			_wallet = wallet;
+			stroller = new();
 		}
 
 		public string UserName { get { return _userName; } } 

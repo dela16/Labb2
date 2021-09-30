@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+
 
 namespace Labb2 
 { 
@@ -12,7 +12,6 @@ namespace Labb2
         static Product tiara = new Product(799, "Tiara");
         static Product lipstick = new Product(49, "Lipstick");
 
-        static List<Product> stroller = new List<Product>();  
 
         static Database database = new Database();
         static Customer currentCustomer; 
@@ -21,7 +20,6 @@ namespace Labb2
         {
             LoginChoices(); 
             ShowLoggedInMenu(); 
-
 
         }
         static void LoginChoices()
@@ -89,6 +87,7 @@ namespace Labb2
             Console.WriteLine("A. Do some shopping.");
             Console.WriteLine("B. Watch you shopping cart.");
             Console.WriteLine("C. Head to the cashier.");
+            Console.WriteLine("D. Log out");
 
             string menu2 = Console.ReadLine().ToUpper(); //Här gör vi så att om användaren skriver in små bokstäver så väljer den ändå rätt.
 
@@ -106,8 +105,11 @@ namespace Labb2
                     Console.WriteLine("Bitch better have some money");
                     CheckOut(); 
                     break;
+                case "D":
+                    Logout();
+                    break;
                 default:
-                    Console.WriteLine("You have to choose a letter between A, B and C.");
+                    Console.WriteLine("You have to choose a letter between A, B, C and D.");
                     break;
             }
 
@@ -133,17 +135,17 @@ namespace Labb2
                 switch (customerChoice)
                 {
                     case "1":
-                        stroller.Add(wig);
+                        currentCustomer.stroller.Add(wig);
                         Console.WriteLine("You've added a wig to your shopping cart.");
                         AddToCart(); 
                         break;
                     case "2":
-                        stroller.Add(tiara);
+                        currentCustomer.stroller.Add(tiara);
                         Console.WriteLine("You've added a tiara to your shopping cart.");
                         AddToCart();
                         break;
                     case "3":
-                        stroller.Add(lipstick);
+                        currentCustomer.stroller.Add(lipstick);
                         Console.WriteLine("You've added a lipstick to your shopping cart.");
                         AddToCart();
                         break;
@@ -158,7 +160,7 @@ namespace Labb2
         private static double GetTotalCost()
         {
             double totalCost = 0;
-            foreach (Product product in stroller)
+            foreach (Product product in currentCustomer.stroller)
             {
                 totalCost += product._Price;
             }
@@ -167,7 +169,7 @@ namespace Labb2
         private static void WatchCart()
         {
             
-            foreach (Product product in stroller)
+            foreach (Product product in currentCustomer.stroller)
             {
                 Console.WriteLine(product._Name + " Which costs "  + product._Price + " SEK."); 
             }
@@ -192,7 +194,7 @@ namespace Labb2
         public static string GetStroller()
         {
             string productString = "";
-            foreach (Product product in stroller)
+            foreach (Product product in currentCustomer.stroller)
             {
                 productString += " "+ product._Name;
             }
@@ -223,11 +225,15 @@ namespace Labb2
             }
             else if (userInput == "3")
             {
-                Console.WriteLine("Thank you, come back again");
-                LoginChoices();
+                Logout();
             }
 
 
+        }
+        private static void Logout()
+        {
+            Console.WriteLine("Thank you, come back again");
+            LoginChoices();
         }
 
     }
